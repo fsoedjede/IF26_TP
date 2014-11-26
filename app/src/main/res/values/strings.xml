@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Messagerie</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="text_label_login">Connexion</string>
+    <string name="text_btn_login">Login</string>
+    <string name="hint_edit_email">Enter Email address</string>
+    <string name="hint_edit_password">Enter Password</string>
+    <string name="link_login">http://train.sandbox.eutech-ssii.com/messenger/login.php</string>
+    <string name="title_activity_message_feed">MessageFeed</string>
+    <string name="send">Send</string>
+
+    <string name="server_address">http://train.sandbox.eutech-ssii.com/messenger/</string>
+
+</resources>
