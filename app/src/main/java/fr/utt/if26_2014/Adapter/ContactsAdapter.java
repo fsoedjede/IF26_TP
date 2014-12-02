@@ -9,14 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import fr.utt.if26_2014.R;
 import fr.utt.if26_2014.Model.ContactMessage;
+import fr.utt.if26_2014.R;
 
 /**
  * Created by soedjede on 18/11/14
@@ -36,9 +34,12 @@ public class ContactsAdapter extends ArrayAdapter<ContactMessage>{
 
     public void addMultiple(List<ContactMessage> object) {
         discussions = object;
-        Iterator<ContactMessage> i = object.iterator();
+        /*Iterator<ContactMessage> i = object.iterator();
         while (i.hasNext()) {
             super.add(i.next());
+        }*/
+        for(ContactMessage cm : object){
+            super.add(cm);
         }
     }
 
@@ -67,20 +68,13 @@ public class ContactsAdapter extends ArrayAdapter<ContactMessage>{
         tv_nom.setText(cmsg.getContact().getFirst_name() + " " + cmsg.getContact().getLast_name() + " (" + cmsg.getContact().getEmail() + ")");
         tv_message.setText(cmsg.getMessage().getMessage());
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("E dd MMM");
         tv_date.setText(formatter.format(cmsg.getMessage().getDate()));
 
-        /*if(cmsg.getMessage().getSent() == false){
-            type = true;
-
-            SpannableString ss_res = new SpannableString(" " + cmsg.getMessage().getMessage());
-            ImageSpan is = new ImageSpan(parent.getContext(), R.drawable.star);
-            ss_res.setSpan(is, 0, 1, 0);
-            tv_message.setText(ss_res);
-        }*/
-
+        type = cmsg.getMessage().getSent();
         //wrapper.setBackgroundColor(row.getContext().getResources().getColor(type ?  R.color.darkblue : R.color.darkgreen));
-        wrapper.setGravity(type ? Gravity.LEFT : Gravity.RIGHT);
+        wrapper.setGravity(type ? Gravity.START : Gravity.END);
         return row;
     }
 
