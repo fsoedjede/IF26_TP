@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import fr.utt.if26_2014.Model.Message;
@@ -34,10 +33,16 @@ public class MessagesAdapter extends ArrayAdapter<Message> {
 
     public void addMultiple(List<Message> object) {
         messages = object;
-        Iterator<Message> i = object.iterator();
-        while (i.hasNext()) {
-            super.add(i.next());
+        for (Message msg : object) {
+            super.add(msg);
         }
+        /*Iterator<Message> it = object.iterator();
+        while (it.hasNext()) {
+            super.add(it.next());
+        }*/
+        /*for(int i = 0; i < object.size(); i++) {
+            super.add(object.get(i));
+        }*/
     }
 
     public int getCount() {
@@ -60,8 +65,8 @@ public class MessagesAdapter extends ArrayAdapter<Message> {
         TextView tv_msg = (TextView) row.findViewById(R.id.tv_msg);
         tv_msg.setText(msg.getMessage());
 
-        tv_msg.setBackgroundResource(msg.getSent() ? R.drawable.bubble_yellow : R.drawable.bubble_green );
-        wrapper.setGravity(msg.getSent() ? Gravity.START : Gravity.END);
+        tv_msg.setBackgroundResource(msg.getSent() ? R.drawable.bubble_green : R.drawable.bubble_yellow );
+        wrapper.setGravity(msg.getSent() ? Gravity.END : Gravity.START);
         //wrapper.setGravity(msg.getSent() ? Gravity.LEFT : Gravity.RIGHT);
         return row;
     }

@@ -14,6 +14,7 @@ import fr.utt.if26_2014.Model.ContactMessage;
 public class ContactsActivity extends Activity {
 
     public final static String userid = "fr.utt.if26_2014.userid";
+    public final static String username = "fr.utt.if26_2014.username";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,13 +27,16 @@ public class ContactsActivity extends Activity {
                 ContactMessage contact_message = (ContactMessage) parent.getAdapter().getItem(position);
                 Intent MessageActivity = new Intent(ContactsActivity.this, MessageFeedActivity.class);
                 MessageActivity.putExtra(userid, contact_message.getContact().getId());
+                MessageActivity.putExtra(username, contact_message.getContact().getFirst_name() + " " + contact_message.getContact().getLast_name());
                 startActivity(MessageActivity);
             }
         });
-
         new ListContactsTask(this).execute();
-
     }
+
+    /*protected void onResume(){
+        new ListContactsTask(this).execute();
+    }*/
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import fr.utt.if26_2014.AsyncTask.ListContactsTask;
 import fr.utt.if26_2014.AsyncTask.ListMessagesTask;
 import fr.utt.if26_2014.AsyncTask.SendMessageTask;
 
@@ -24,6 +23,8 @@ public class MessageFeedActivity extends Activity {
         Intent intent = getIntent();
         other_userid = intent.getIntExtra(ContactsActivity.userid, 0);
 
+        setTitle(intent.getStringExtra(ContactsActivity.username));
+
         ListMessagesTask mMessagesTask = new ListMessagesTask(this);
         mMessagesTask.execute(String.valueOf(other_userid));
 
@@ -38,7 +39,7 @@ public class MessageFeedActivity extends Activity {
                     et_message.setText(null);
                     et_message.setHint("Send message");
                     new ListMessagesTask(MessageFeedActivity.this).execute(String.valueOf(other_userid));
-                    new ListContactsTask(MessageFeedActivity.this).execute();
+                    //new ListContactsTask(MessageFeedActivity.this).execute();
                 } else {
                     Toast.makeText(MessageFeedActivity.this, "Saisissez votre message", Toast.LENGTH_SHORT).show();
                 }

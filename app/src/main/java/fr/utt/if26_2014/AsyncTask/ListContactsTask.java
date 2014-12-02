@@ -65,7 +65,6 @@ public class ListContactsTask extends AsyncTask<String, Void, String> {
                 if (error){
                     Toast.makeText(context, "Impossible de récupérer les informations", Toast.LENGTH_SHORT).show();
                 } else {
-
                     ArrayList<ContactMessage> discussion = new ArrayList<ContactMessage>();
                     JSONArray contact_array = (JSONArray) object.get("contacts");
                     for (int i = 0; i < contact_array.length(); i++) {

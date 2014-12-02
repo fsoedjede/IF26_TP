@@ -16,15 +16,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import fr.utt.if26_2014.ContactsActivity;
-import fr.utt.if26_2014.LoginActivity;
 import fr.utt.if26_2014.tools.Prefs;
 
 /**
- * Created by soedjede on 26/11/14.for ${PROJECT}
+ * Created by soedjede on 26/11/14
  */
 public class LoginTask extends AsyncTask<String, Void, String> {
-
-
 
     private Activity context;
 
