@@ -5,22 +5,16 @@ import android.os.AsyncTask;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import fr.utt.if26_2014.Adapter.MessagesAdapter;
 import fr.utt.if26_2014.Model.Message;
 import fr.utt.if26_2014.R;
+import fr.utt.if26_2014.Rest.Get;
 import fr.utt.if26_2014.tools.Prefs;
 
 
@@ -35,25 +29,9 @@ public class ListMessagesTask extends AsyncTask<String, Void, String> {
     }
 
     protected String doInBackground(String... args) {
-        String json_string = "";
         Prefs prefs = new Prefs(context);
         String token = prefs.getMyPrefs("token");
-        String other_userid = args[0];
-        try{
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet("http://train.sandbox.eutech-ssii.com/messenger/messages.php" + "?token=" + token + "&contact=" + other_userid);
-            HttpResponse response = client.execute(request);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                json_string += inputLine;
-            }
-            in.close();
-        } catch (IOException ex){
-            ex.printStackTrace();
-        }
-        return json_string;
+        return Get.get_string("messages.php" + "?token=" + token + "&contact=" + args[0]);
     }
 
     protected void onPostExecute(String result) {

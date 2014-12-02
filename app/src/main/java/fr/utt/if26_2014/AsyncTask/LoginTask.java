@@ -5,17 +5,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import fr.utt.if26_2014.ContactsActivity;
+import fr.utt.if26_2014.Rest.Get;
 import fr.utt.if26_2014.tools.Prefs;
 
 /**
@@ -30,24 +23,7 @@ public class LoginTask extends AsyncTask<String, Void, String> {
     }
 
     protected String doInBackground(String... args) {
-        String json_string = "";
-        String email = args[0];
-        String password = args[1];
-        try {
-            HttpClient client = new DefaultHttpClient();
-            HttpGet request = new HttpGet("http://train.sandbox.eutech-ssii.com/messenger/login.php" + "?email=" + email + "&password=" + password);
-            HttpResponse response = client.execute(request);
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                json_string += inputLine;
-            }
-            in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return json_string;
+        return Get.get_string("login.php" + "?email=" + args[0] + "&password=" + args[1]);
     }
 
     protected void onPostExecute(String result) {
