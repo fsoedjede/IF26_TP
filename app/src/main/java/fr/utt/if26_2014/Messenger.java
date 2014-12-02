@@ -18,10 +18,10 @@ public class Messenger extends Application {
         return appContext;
     }
 
-    public static boolean isInternetconnected(Context ct) {
+    public static boolean isInternetconnected() {
         boolean connected = false;
         //get the connectivity manager object to identify the network state.
-        ConnectivityManager connectivityManager = (ConnectivityManager) ct.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         //Check if the manager object is NULL, this check is required. to prevent crashes in few devices.
         if (connectivityManager != null) {
             //Check Mobile data or Wifi net is present
